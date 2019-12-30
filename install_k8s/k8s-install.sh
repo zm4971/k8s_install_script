@@ -664,7 +664,7 @@ do
    scp -r ssl/* $i:/etc/kubernetes/ssl 
    scp kubelet proxy $i:/etc/kubernetes
    scp kubelet.service kube-proxy.service  $i:/usr/lib/systemd/system
-   ssh $i 'systemctl daemon-reload;node_hostname=`hostname`;node_ip=$(grep `hostname` /etc/hosts|awk '{print $1}');sed 's/$node_hostname/'$node_hostname'/g' /etc/kubernetes/kubelet;sed 's/$node_ip/'$node_ip'/g' /etc/kubernetes/kubelet;sed 's/$node_hostname/'$node_hostname'/g' /etc/kubernetes/proxy;sed 's/$node_ip/'$node_ip'/g' /etc/kubernetes/apiserver;chown -R kube:kube /etc/kubernetes;'
+   ssh $i 'systemctl daemon-reload;node_hostname=`hostname`;node_ip=$(grep `hostname` /etc/hosts|cut -d  -f1);sed 's/$node_hostname/'$node_hostname'/g' /etc/kubernetes/kubelet;sed 's/$node_ip/'$node_ip'/g' /etc/kubernetes/kubelet;sed 's/$node_hostname/'$node_hostname'/g' /etc/kubernetes/proxy;sed 's/$node_ip/'$node_ip'/g' /etc/kubernetes/apiserver;chown -R kube:kube /etc/kubernetes;'
    
 done 
 
